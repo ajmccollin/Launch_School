@@ -1,3 +1,8 @@
+import json
+with open('calculator_messages.json', 'r') as file:
+    MESSAGE = json.load(file)
+
+
 def prompt(message):
     print(f'==> {message}')
 
@@ -9,39 +14,54 @@ def invalid_number(number_str):
 
     return False
 
-prompt('Welcome to Calculator!')
+prompt(MESSAGE['welcome'])
 
-prompt("What's the first number? ")
-number1 = input()
-
-while invalid_number(number1):
-    prompt("Hmm... that doesn't look like a valid number.")
+calculate = True
+while calculate:
+    prompt(MESSAGE['first_number'])
     number1 = input()
 
-prompt("What's the second number? ")
-number2 = input()
 
-while invalid_number(number2):
-    prompt("Hmm... that doesn't look like a valid number")
+    while invalid_number(number1):
+        prompt(MESSAGE['invalid_number'])
+        number1 = input()
+
+    prompt(MESSAGE['second_number'])
     number2 = input()
 
-prompt('''What operation would you like to perform?
-      '1) Add 2) Subract 3) Multiply 4) Divide''')
-operation = input()
+    while invalid_number(number2):
+        prompt(MESSAGE['invalid_number'])
+        number2 = input()
 
-
-while operation not in ['1', '2', '3', '4']:
-    prompt('You must choose 1, 2, 3, or 4')
+    prompt(MESSAGE['operation'])
     operation = input()
 
-match operation:
-    case '1':   # '1' represents addition
-        output = int(number1) + int(number2)
-    case '2':   #'2' represents subtraction
-        output = int(number1) - int(number2)
-    case '3':   #'3' represents multiplication
-        output = int(number1) * int(number2)
-    case '4':   #'4' represents division
-        output = int(number1) / int(number2)
+    while operation not in ['1', '2', '3', '4']:
+        prompt('You must choose 1, 2, 3, or 4')
+        operation = input()
 
-prompt(f'The result is {output}')
+    match operation:
+        case '1':   # '1' represents addition
+            output = int(number1) + int(number2)
+        case '2':   #'2' represents subtraction
+            output = int(number1) - int(number2)
+        case '3':   #'3' represents multiplication
+            output = int(number1) * int(number2)
+        case '4':   #'4' represents division
+            output = int(number1) / int(number2)
+
+    prompt(f'The result is {output}')
+    prompt(MESSAGE['recalculate'])
+    
+    recalculate = input()
+    while recalculate not in ['Y', 'N']:
+        prompt('Please enter Y or N ')
+        recalculate = input()
+    if recalculate == 'Y':
+        continue
+    elif recalculate == 'N':
+        calculate = False
+        
+
+
+        
