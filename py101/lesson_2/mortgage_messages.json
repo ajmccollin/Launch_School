@@ -1,0 +1,5 @@
+{
+    "welcome": "Welcome to the Mortgage Calculator!",
+    "loan_amount": "What is your loan amount? ",
+    "invalid_number": "Please enter a valid number greater than zero: "
+}
