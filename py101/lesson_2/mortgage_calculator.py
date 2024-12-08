@@ -1,4 +1,5 @@
 import time
+import os
 import json
 with open('mortgage_messages.json', 'r') as file:
     MESSAGE = json.load(file)
@@ -15,10 +16,10 @@ def invalid_number(user_number):
         return True
     return False
 
+os.system('clear')
 prompt(MESSAGE['welcome'])
 
-calculate = True
-while calculate:
+while True:
     prompt(MESSAGE['loan_amount'])
     loan_amount = (input('$'))
 
@@ -53,12 +54,11 @@ while calculate:
     time.sleep(1.5)
     prompt('Would you like to calculate something else? Y/N? ')
     recalculate = input()
-
     while recalculate not in ['Y', 'N']:
         prompt('Please enter Y or N ')
         recalculate = input()
     if recalculate == 'Y':
+        os.system('clear')
         continue
-    elif recalculate == 'N':
-        prompt('Thank you for using this calculator. Goodbye! ')
-        calculate = False
+    prompt('Thank you for using this calculator. Goodbye! ')
+    break
