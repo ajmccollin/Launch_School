@@ -6,94 +6,123 @@ import json
 with open('rock_paper_scissors_message.json', 'r') as file:
     MESSAGE = json.load(file)
 
-VALID_CHOICES = {'r': 'rock',
-                 'p': 'paper',
-                 'sc': 'scissors',
-                 'sp': 'spock',
-                 'l': 'lizard',
-                 }
+#THINGS TO ADJUST:
+    #Make both 'r' and 'rock' valid inputs, for all choices.
+    #json file for instructions on line 32
 
+VALID_CHOICES = {
+    'r': 'rock',
+    'p': 'paper',
+    'sc': 'scissors',
+    'sp': 'spock',
+    'l': 'lizard',
+}
+
+WINNING_CONDITIONS = {
+    'r': ['sc', 'l'],
+    'p': ['r', 'sp'],
+    'sc': ['p', 'l'],
+    'sp': ['r', 'sc'],
+    'l': ['sp', 'p'],
+}
 
 def prompt(message):
     print(f'==> {message}')
 
-def yes_or_no(user_selection): #Validates that user input is either y or n
-    while True:
-        if user_selection.startswith('n') or user_selection.startswith('y'):
-            break
-        prompt("Please enter 'y' or 'n'.")
-        user_selection = input()
+def display_instructions():
+    os.system('clear')
+    prompt('Scissors cuts Paper and decapitates Lizard!')
+    prompt('Paper covers Rock and disproves Spock!')
+    prompt('Rock crushes Lizard and crushes Scissors!')
+    prompt('Lizard eats Paper and poisons Spock!')
+    prompt('Spock smashes Scissors and vaportizes Rock!\n')
+    prompt('Beat the Computer in a best of 5 to be crowned the Grand Winner!')
+    time.sleep(2)
 
-def display_winner(player, computer, iteration): #Iteration is number of rounds
-    if ((player == 'r' and computer == 'sc') or
-        (player == 'r' and computer == 'l') or
-        (player == 'p' and computer == 'r') or
-        (player == 'p' and computer == 'sp') or
-        (player == 'sc' and computer == 'p') or
-        (player == 'sc' and computer == 'l') or
-        (player == 'sp' and computer == 'r') or
-        (player == 'sp' and computer == 'sc') or
-        (player == 'l' and computer == 'sp') or
-        (player == 'l' and computer == 'p')):
-        prompt(f'You win round {iteration}!\n')
-    elif ((computer == 'r' and player == 'sc') or
-        (computer == 'r' and player == 'l') or
-        (computer == 'p' and player == 'r') or
-        (computer == 'p' and player == 'sp') or
-        (computer == 'sc' and player == 'p') or
-        (computer == 'sc' and player == 'l') or
-        (computer == 'sp' and player == 'r') or
-        (computer == 'sp' and player == 'sc') or
-        (computer == 'l' and player == 'sp') or
-        (computer == 'l' and player == 'p')):
-        prompt(f'You lose round {iteration}!\n')
+
+def display_winner(player, computer):
+    if computer in (WINNING_CONDITIONS[player]): #Player loss condition
+        player_loss()
+    elif (player in WINNING_CONDITIONS[computer]): #Player win condition
+        player_win()
     else:
-        prompt(f'Round {iteration} is a tie!\n')
+        print("==> It's a tie!", end=' ')
+
+def display_score():
+    print(f"The score is {current_standings['Player Score']}:"
+          f"{current_standings['Computer Score']}\n")
+
+def player_loss():
+    print('==> You lost this round! ', end= '')
+    current_standings['Computer Score'] += 1
+
+def player_win():
+    print('==> You win this round. ', end= '')
+    current_standings['Player Score'] += 1
+
+def display_current_round():
+    print(f"==> Round {current_standings['Round Number']}! "
+           "Make your selection:")
+
 
 os.system('clear')
 prompt('Welcome to Rock, Paper, Scissors, Lizard, Spock!')
 prompt('Would you like the rules to this game? (y/n?)' )
-display_instructions = input().lower()
-yes_or_no(display_instructions)
+show_rules = input().lower()
 
-if display_instructions == 'y':
-    os.system('clear')
-    prompt('Scissors cuts Paper and decapitates Lizard!\n'
-           'Paper covers Rock and disproves Spock!\n'
-           'Rock crushes Lizard and crushes Scissors!\n'
-           'Lizard eats Paper and poisons Spock!\n'
-           'Spock smashes Scissors and vaportizes Rock!\n')
-    time.sleep(2)
+while show_rules not in ['y', 'yes', 'n', 'no']:
+    prompt(MESSAGE['yes_no'])
+    show_rules = input().lower()
+
+if show_rules in ['yes', 'y']:
+    display_instructions()
+
+print()
+for key, value in VALID_CHOICES.items():
+    print(f"==> Enter '{key}' for {value}")
+print()
 
 while True: #Loop to decide whether to play again.
-    prompt('Please enter:') #Prints valid options for user to choose from.
-    for key, value in VALID_CHOICES.items():
-        print(f"'{key}' for {value}")
-    print()
+    current_standings = {
+        'Computer Score' : 0,
+        'Player Score' : 0,
+        'Round Number' : 1,
+    }
 
-    round_number = 1
-    while round_number <= 5:
-        prompt(f"Round {round_number}! "
-               f"Enter {', '.join(VALID_CHOICES.keys())}")
+    while True:
+        time.sleep(.5)
+        display_current_round()
         user_choice = input().lower()
 
-        while user_choice not in VALID_CHOICES:
+        while user_choice not in (VALID_CHOICES):
             prompt(f"Invalid input. "
                    f"Please enter {', '.join(VALID_CHOICES.keys())}")
-            user_choice = input()
+            user_choice = input().lower()
 
         computer_choice = random.choice(list(VALID_CHOICES.keys()))
         prompt(f'You chose {VALID_CHOICES[user_choice].capitalize()}. '
                f'The computer chose '
                f'{VALID_CHOICES[computer_choice].capitalize()}.')
 
-        display_winner(user_choice, computer_choice, round_number)
-        round_number += 1
+        display_winner(user_choice, computer_choice)
+        display_score()
+        current_standings['Round Number'] += 1
 
+        if current_standings['Player Score'] == 3:
+            time.sleep(.5)
+            prompt("You're the Grand Winner!!")
+            break
+
+        if current_standings['Computer Score'] == 3:
+            time.sleep(.5)
+            prompt("The computer is the Grand Winner!!")
+            break
 
     prompt('Do you want to play again? (y/n?) ')
     play_again = input().lower()
-    yes_or_no(play_again)
+    while play_again not in ['yes', 'y', 'no', 'n']:
+        prompt(MESSAGE['yes_no'])
+        play_again = input().lower()
 
     if play_again[0] == 'n':
         os.system('clear')
