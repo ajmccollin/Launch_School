@@ -56,8 +56,8 @@ def player_win():
     current_standings['Player Score'] += 1
 
 def display_current_round():
-    prompt(f"Round {current_standings['Round Number']}! "
-           "Make your selection:")
+    prompt(f"******* ROUND {current_standings['Round Number']}!! *******")
+    prompt("Make your selection: ")
 
 
 os.system('clear')
@@ -86,7 +86,6 @@ while True: #Loop to decide whether to play again.
     }
 
     while True:
-        time.sleep(.5)
         display_current_round()
         user_choice = input().lower()
 
@@ -103,14 +102,13 @@ while True: #Loop to decide whether to play again.
         display_winner(user_choice, computer_choice)
         display_score()
         current_standings['Round Number'] += 1
+        time.sleep(1)
 
         if current_standings['Player Score'] == 3:
-            time.sleep(.5)
             prompt("You're the Grand Winner!!\n")
             break
 
         if current_standings['Computer Score'] == 3:
-            time.sleep(.5)
             prompt("The computer is the Grand Winner!!\n")
             break
 
