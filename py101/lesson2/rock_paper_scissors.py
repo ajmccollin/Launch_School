@@ -61,8 +61,8 @@ def display_current_round():
 
 
 os.system('clear')
-prompt(MESSAGE['welcome_message'])
-prompt('Would you like the rules to this game? (y/n?)' )
+prompt(MESSAGE['welcome'])
+prompt(MESSAGE['instructions'] )
 show_rules = input().lower()
 
 while show_rules not in ['y', 'yes', 'n', 'no']:
@@ -115,7 +115,7 @@ while True: #Loop to decide whether to play again.
             break
 
     time.sleep(1)
-    prompt('Do you want to play again? (y/n?) ')
+    prompt(MESSAGE['play_again'])
     play_again = input().lower()
     while play_again not in ['yes', 'y', 'no', 'n']:
         prompt(MESSAGE['yes_no'])
