@@ -1,1 +1,10 @@
-{"yes_no": "Please enter 'y' or 'n'."}
+{
+    "yes_no" : "Please enter 'y' or 'n'.",
+    "welcome_message" : "Welcome to Rock, Paper, Scissors, Lizard, Spock!",
+    "rock_win" : "Rock crushes Lizard and crushes Scissors!",
+    "paper_win" : "Paper covers Rock and disproves Spock!",
+    "scissors_win" : "Scissors cuts Paper and decapitates Lizard!",
+    "lizard_win" : "Lizard eats Paper and poisons Spock!",
+    "spock_win" : "Spock smashes Scissors and vaportizes Rock!\n",
+    "overall_winner" : "Beat the Computer in a best of 5 to be crowned the Grand Winner!"
+}

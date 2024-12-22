@@ -6,10 +6,6 @@ import json
 with open('rock_paper_scissors_message.json', 'r') as file:
     MESSAGE = json.load(file)
 
-#THINGS TO ADJUST:
-    #Make both 'r' and 'rock' valid inputs, for all choices.
-    #json file for instructions on line 32
-
 VALID_CHOICES = {
     'r': 'rock',
     'p': 'paper',
@@ -30,43 +26,42 @@ def prompt(message):
     print(f'==> {message}')
 
 def display_instructions():
-    os.system('clear')
-    prompt('Scissors cuts Paper and decapitates Lizard!')
-    prompt('Paper covers Rock and disproves Spock!')
-    prompt('Rock crushes Lizard and crushes Scissors!')
-    prompt('Lizard eats Paper and poisons Spock!')
-    prompt('Spock smashes Scissors and vaportizes Rock!\n')
-    prompt('Beat the Computer in a best of 5 to be crowned the Grand Winner!')
+    prompt(MESSAGE['rock_win'])
+    prompt(MESSAGE['paper_win'])
+    prompt(MESSAGE['scissors_win'])
+    prompt(MESSAGE['lizard_win'])
+    prompt(MESSAGE['spock_win'])
+    prompt(MESSAGE['overall_winner'])
     time.sleep(2)
 
 
 def display_winner(player, computer):
-    if computer in (WINNING_CONDITIONS[player]): #Player loss condition
+    if player in WINNING_CONDITIONS[computer]: #Player loss condition
         player_loss()
-    elif (player in WINNING_CONDITIONS[computer]): #Player win condition
+    elif computer in WINNING_CONDITIONS[player]: #Player win condition
         player_win()
     else:
-        print("==> It's a tie!", end=' ')
+        print("==> It's a tie!", end=" ")
 
 def display_score():
     print(f"The score is {current_standings['Player Score']}:"
           f"{current_standings['Computer Score']}\n")
 
 def player_loss():
-    print('==> You lost this round! ', end= '')
+    print('==> You lost this round!', end=" ")
     current_standings['Computer Score'] += 1
 
 def player_win():
-    print('==> You win this round. ', end= '')
+    print('==> You win this round!', end=" ")
     current_standings['Player Score'] += 1
 
 def display_current_round():
-    print(f"==> Round {current_standings['Round Number']}! "
+    prompt(f"Round {current_standings['Round Number']}! "
            "Make your selection:")
 
 
 os.system('clear')
-prompt('Welcome to Rock, Paper, Scissors, Lizard, Spock!')
+prompt(MESSAGE['welcome_message'])
 prompt('Would you like the rules to this game? (y/n?)' )
 show_rules = input().lower()
 
@@ -75,11 +70,12 @@ while show_rules not in ['y', 'yes', 'n', 'no']:
     show_rules = input().lower()
 
 if show_rules in ['yes', 'y']:
+    os.system('clear')
     display_instructions()
-
 print()
+
 for key, value in VALID_CHOICES.items():
-    print(f"==> Enter '{key}' for {value}")
+    prompt(f"Enter '{key}' for {value}")
 print()
 
 while True: #Loop to decide whether to play again.
@@ -110,14 +106,15 @@ while True: #Loop to decide whether to play again.
 
         if current_standings['Player Score'] == 3:
             time.sleep(.5)
-            prompt("You're the Grand Winner!!")
+            prompt("You're the Grand Winner!!\n")
             break
 
         if current_standings['Computer Score'] == 3:
             time.sleep(.5)
-            prompt("The computer is the Grand Winner!!")
+            prompt("The computer is the Grand Winner!!\n")
             break
 
+    time.sleep(1)
     prompt('Do you want to play again? (y/n?) ')
     play_again = input().lower()
     while play_again not in ['yes', 'y', 'no', 'n']:
