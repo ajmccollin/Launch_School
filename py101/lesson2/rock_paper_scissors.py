@@ -35,7 +35,7 @@ def display_instructions():
     time.sleep(2)
 
 
-def display_winner(player, computer):
+def decide_winner(player, computer):
     if player in WINNING_CONDITIONS[computer]: #Player loss condition
         player_loss()
     elif computer in WINNING_CONDITIONS[player]: #Player win condition
@@ -99,7 +99,7 @@ while True: #Loop to decide whether to play again.
                f'The computer chose '
                f'{VALID_CHOICES[computer_choice].capitalize()}.')
 
-        display_winner(user_choice, computer_choice)
+        decide_winner(user_choice, computer_choice)
         display_score()
         current_standings['Round Number'] += 1
         time.sleep(1)
