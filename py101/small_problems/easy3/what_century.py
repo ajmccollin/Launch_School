@@ -1,8 +1,9 @@
 def century(year):
-    if year > 99:
-        century = year / 100
-        match century:
-            case 
+    if year < 100:
+        century = 1
+    century = year // 100
+    match century:
+        case 1:
 
 
 print(century(2000) == "20th")          # True

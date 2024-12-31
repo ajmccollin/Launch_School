@@ -4,3 +4,10 @@ numbers.pop(2)
 
 print(numbers)
 
+
+
+
+
+
+
+numbers.remove[2]
