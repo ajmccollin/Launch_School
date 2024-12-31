@@ -1,4 +1,10 @@
 #double number: first half is the same as the second half
+def twice(int_value):
+    half_value = (int_value) // 2
+    if int_value[0, half_value] == int_value[half_value, int_value]:
+        return int_value
+    else:
+        return int(int_value) * 2
 
 
 print(twice(37) == 74)                  # True

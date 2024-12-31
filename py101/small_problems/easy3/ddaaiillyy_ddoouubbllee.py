@@ -1,6 +1,7 @@
 
 
 # These examples should all print True
+print(crunch('ddaaiillyy'))
 print(crunch('ddaaiillyy ddoouubbllee') == 'daily double')
 print(crunch('4444abcabccba') == '4abcabcba')
 print(crunch('ggggggggggggggg') == 'g')

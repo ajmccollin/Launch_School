@@ -1,13 +1,12 @@
 #write a function that:
-    #takes a positie int
+    #takes a positive int
     #returns a string of alternating 1 and 0 starting with 1
-
-def stringy(num):
-    index = 0
-    collection = []
-    while index < num:
-    
-        
+def stringy(int_value):
+    string_value = ''
+    for num in range(1, int_value + 1):
+        added_number = '1' if num % 2 == 1 else '0'
+        string_value += added_number
+    return string_value
 
 
 print(stringy(6))
