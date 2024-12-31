@@ -1,8 +1,9 @@
-import math
+def century(year):
+    if year > 99:
+        century = year / 100
+        match century:
+            case 
 
-def century(num):
-    century = (math.ceil(num / 100))
-    if century // 100 
 
 print(century(2000) == "20th")          # True
 print(century(2001) == "21st")          # True

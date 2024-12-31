@@ -1,19 +1,8 @@
-def utf16_value(string):
-    index = 0
-    collection = []
-    while index < len(string):
-        collection.append(ord(string[index]))
-        index += 1
-    return sum(collection)
-
-
-'''
-def utf16_value(string):
+def utf16_value(user_string):
     total_sum = 0
-    for char in string:
+    for char in user_string:
         total_sum += ord(char)
     return total_sum
-'''
 
 # These examples should all print True
 print(utf16_value('Four score') == 984)

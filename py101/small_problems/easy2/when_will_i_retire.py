@@ -1,15 +1,12 @@
-#ask user for age
-#ask user what age they would like to retire at
-#state the date, and the date + retirement age
-    #import date_time module to get correct date
-#return future_date - current_date
-import datetime
+from datetime import datetime
 
-year = datetime.datetime.now().year
+user_age = int(input("What's your age? "))
+retirement_age = int(input("At what age would you like to retire? "))
+years_to_retirement = retirement_age - user_age
 
-user_age = int(input('What is your current age? '))
-retirement_age = int(input('At what age would you like to retire? '))
-retirement_year = year + (retirement_age - user_age)
+current_year = datetime.now().year
+retirement_year = current_year + years_to_retirement
+print(f"It's {current_year}. You will retire in {retirement_year}")
+print(f"You only have {years_to_retirement} years of work to go! ")
 
-print(f'It\'s {year}. You will retire in {retirement_year}')
-print(f'You have only {retirement_year - year} years of work to go!')
+

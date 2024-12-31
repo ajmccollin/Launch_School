@@ -1,10 +1,5 @@
-'''def negative(num):
-    if num > 0:
-        return -num
-    return num'''
-
-def negative(num):
-    return (-abs(num))
+def negative(number):
+    return -abs(number)
 
 print(negative(5) == -5)      # True
 print(negative(-3) == -3)     # True

@@ -1,13 +1,6 @@
-#def a function that:
-    #returns the next to last word in str 
-    #any non_blank sequence of characters
-    #input will always contain at least two words
-
-def penultimate(string):
-    string_list = string.split()
-    return string_list[-2]
-
-# These examples should print True
+def penultimate(message):
+    split_words = message.split()
+    return split_words[-2]
 
 print(penultimate("last word"))
 print(penultimate("Launch School is great!"))
