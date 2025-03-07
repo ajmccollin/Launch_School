@@ -72,10 +72,12 @@ while show_rules not in ['y', 'yes', 'n', 'no']:
 if show_rules in ['yes', 'y']:
     os.system('clear')
     display_instructions()
+    
 print()
 
 for key, value in VALID_CHOICES.items():
     prompt(f"Enter '{key}' for {value}")
+
 print()
 
 while True: #Loop to decide whether to play again.
