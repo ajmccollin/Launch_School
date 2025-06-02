@@ -1,8 +1,8 @@
 def is_real_palindrome(string):
     alnum_chars = ''
     for char in string:
-        if char.isalnum() == True:
-            alnum_chars += char.lower()
+        if char.isalnum():
+            alnum_chars += char.casefold()
     return alnum_chars == alnum_chars[::-1]
 
 
