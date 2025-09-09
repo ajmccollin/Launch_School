@@ -5,7 +5,10 @@ events = {
 }
 
 def is_date_available(date):
-    return date not in events
+    if date in events.keys():
+        return False
+
+    return True
 
 print(is_date_available("2023-08-14"))  # should return False
 print(is_date_available("2023-08-16"))  # should return True
