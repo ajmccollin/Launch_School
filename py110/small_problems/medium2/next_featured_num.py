@@ -21,6 +21,9 @@ A - 1. Create 3 functions
     3. If it is also not a repeated integer, return that number, otherwise, add
         14 until it meets are 3 function requirements.
 '''
+ERROR_MESSAGE = 'There is no possible number that fulfills those requirements.'
+LARGEST_FEATURED_NUM = 9876543201
+
 def is_odd(num):
     return num % 2 == 1
 
@@ -28,24 +31,21 @@ def divisible_by_7(num):
     return num % 7 == 0
 
 def unique_digits(num):
-    unique_numbers = ''
-    for num in str(num):
-        if num in unique_numbers:
-            return False
-        unique_numbers += num
-    return True
+    return len(str(num)) == len(set(str(num)))
 
 def next_featured(num):
     next_featured = num + 1
-    if next_featured > 9876543201:
-        return 'There is no possible number that fulfills those requirements.'
+    if next_featured > LARGEST_FEATURED_NUM:
+        return ERROR_MESSAGE
     
     while not all((is_odd(next_featured), divisible_by_7(next_featured))):
         next_featured += 1
 
     while not all((is_odd(next_featured), divisible_by_7(next_featured), 
                    unique_digits(next_featured))):
-        next_featured += 14
+            next_featured += 14
+            if next_featured > LARGEST_FEATURED_NUM:
+                 return ERROR_MESSAGE
 
     return next_featured
 
