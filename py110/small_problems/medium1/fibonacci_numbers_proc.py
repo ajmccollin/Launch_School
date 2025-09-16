@@ -8,12 +8,24 @@ D - I: An integer, which represents the nth fibonacci number.
     O: The sum of the fibonacci numbers, represented as an integer.
     N: Use the range function?
 A - 1. Define a function called fibonacci with the parameter nth_num
-    2. Create two variables that are equal to 1.
-    3. Iterate over each number in the range from 0 to the nth_num + 1.
-    4.
+    2. Create a conditional, if nth is less than 2, return 1.
+    3. Create two variables, previous and current and set both equal to 1.
+    4. iterate over each number in range of 3, nth number.
+        for each iteration, set previous equal to current and current equal to 
+                previous plus current.
+        return current. 
 '''
-def fibonacci():
-    pass
+def fibonacci(nth):
+    if nth <= 2:
+        return 1
+    
+    previous = 1
+    current = 1
+
+    for _ in range(3, nth + 1):
+        previous, current = current, current + previous
+
+    return current
 
 print(fibonacci(1) == 1)                  # True
 print(fibonacci(2) == 1)                  # True

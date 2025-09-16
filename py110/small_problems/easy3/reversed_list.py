@@ -1,13 +1,33 @@
+'''
+P - Create a function that takes a list as an argument and reverse the elements
+        without using a slice or list.reverse method. 
+E -  E: Cannot use the reverse method or a list slice.
+        Output list should be mutated and should be same as the argument.
+        
+    IQ:
+D -  I:
+     O:
+     N:
+A -
+'''
+# FIRST APPROACH, STILL FUNCTIONAL
+# def reverse_list(input_list):
+#     count = len(input_list)
+#     while count > 0:
+#         input_list.append(input_list.pop(count - 1))
+#         count -= 1
+#     return input_list
+
 def reverse_list(input_list):
-    reversed_list = []
-    index = len(input_list)
-    while index >= 0:
-        reversed_list.append(input_list[index])
-        index =- 1
-    return reversed_list
+    first = 0
+    last = -1
 
-    
+    while first < (len(input_list) // 2):
+        input_list[first], input_list[last] = input_list[last], input_list[first]
+        first += 1
+        last -= 1
 
+    return input_list
 
 list1 = [1, 2, 3, 4]
 result = reverse_list(list1)
